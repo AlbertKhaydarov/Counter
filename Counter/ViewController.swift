@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    var changeHistoryText: [String] = []
+    var changeHistoryText: [String] = ["\n"]
     
     var countOfTapped: Int = 0 {
         didSet {
@@ -50,12 +50,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(resetCountButton)
         setupResetCountButtonView(button: resetCountButton)
+       
 
     }
     func updateHistory(){
 //        changeHistoryText.forEach { string in
-        guard let string = changeHistoryText.first else {return}
-        changedHistoryTextField.text = "\(string)\n\n"
+       let string = changeHistoryText
+        changedHistoryTextField.text += "\(string)\n"
 //        }
     }
     
