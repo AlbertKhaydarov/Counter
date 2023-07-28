@@ -25,8 +25,9 @@ class ViewController: UIViewController {
     lazy var resetCountButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
-        configuration.baseBackgroundColor = .systemGray5
-        configuration.image = UIImage(systemName: "goforward.5.ar")?.withRenderingMode(.alwaysTemplate)
+        configuration.baseBackgroundColor = 
+
+        configuration.image = .init(named: "fa6-solid_repeat")?.withRenderingMode(.alwaysTemplate)
         configuration.cornerStyle = .capsule
         configuration.baseForegroundColor = .systemOrange
         let button = UIButton(configuration: configuration)
@@ -50,6 +51,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(resetCountButton)
         setupResetCountButtonView(button: resetCountButton)
+        
        
 
     }

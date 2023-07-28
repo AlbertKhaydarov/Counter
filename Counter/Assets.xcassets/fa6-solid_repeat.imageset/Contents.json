@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "fa6-solid_repeat.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

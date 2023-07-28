@@ -79,6 +79,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="258" id="8Ie-mq-cic"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Значение счётчика: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kf-99-kE9">
@@ -87,17 +88,25 @@
                                     <constraint firstAttribute="height" constant="44" id="DuZ-BN-Y5w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Счетчик" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwV-jB-GG1">
+                                <rect key="frame" x="136" y="96" width="121" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="1" green="0.090196078431372548" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EgJ-I9-Ckm" secondAttribute="trailing" constant="40" id="55e-Mc-OfD"/>
                             <constraint firstItem="6Kf-99-kE9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="123" id="6hM-Um-lXx"/>
+                            <constraint firstItem="mwV-jB-GG1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7c6-Ig-VxY"/>
                             <constraint firstItem="EgJ-I9-Ckm" firstAttribute="top" secondItem="xTm-7p-Kag" secondAttribute="bottom" constant="40" id="G3j-xD-DX7"/>
                             <constraint firstItem="wuZ-1m-oI3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="K3R-m9-m3l"/>
+                            <constraint firstItem="mwV-jB-GG1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="QEZ-59-ITV"/>
                             <constraint firstItem="6Kf-99-kE9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="QXM-gq-31L"/>
                             <constraint firstItem="EgJ-I9-Ckm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="QfF-Mz-AnF"/>
                             <constraint firstItem="xTm-7p-Kag" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="lIK-bT-jsw"/>
