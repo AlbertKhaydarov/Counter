@@ -16,20 +16,35 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var counterLabel: UILabel!
  
-    @IBOutlet weak var countPlusButton: UIButton!
-    
-    @IBOutlet weak var countMinesButton: UIButton!
     
     @IBOutlet weak var changedHistoryTextField: UITextView!
+    
+    lazy var countPlusButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.buttonSize = .large
+        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
+        configuration.image = .init(named: "plus32")?.withRenderingMode(.alwaysTemplate)
+        configuration.cornerStyle = .capsule
+        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        let button = UIButton(configuration: configuration)
+        button.addAction((UIAction(handler: { [weak self] _ in
+            self?.countOfTapped += 1
+            self?.changeHistoryText.insert("[дата и время]: значение изменено на +1", at: 0)
+            self?.updateHistory()
+        })), for: .touchUpInside)
+      
+
+        return button
+    }()
     
     lazy var resetCountButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
-        configuration.baseBackgroundColor = 
+        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
 
         configuration.image = .init(named: "fa6-solid_repeat")?.withRenderingMode(.alwaysTemplate)
         configuration.cornerStyle = .capsule
-        configuration.baseForegroundColor = .systemOrange
+        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         let button = UIButton(configuration: configuration)
         button.addAction((UIAction(handler: { [weak self] _ in
             self?.countOfTapped = 0
@@ -37,6 +52,31 @@ class ViewController: UIViewController {
             self?.updateHistory()
         })), for: .touchUpInside)
         return button
+    }()
+    
+    lazy var countMinesButton: UIButton = {
+        var configuration = UIButton.Configuration.filled()
+        configuration.buttonSize = .large
+        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
+
+        configuration.image = .init(named: "minus32")?.withRenderingMode(.alwaysTemplate)
+        configuration.cornerStyle = .capsule
+        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        let button = UIButton(configuration: configuration)
+        button.addAction((UIAction(handler: { [weak self] _ in
+            self?.countOfTapped += 1
+            self?.changeHistoryText.insert("[дата и время]: значение изменено на +1", at: 0)
+            self?.updateHistory()
+        })), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy  var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        
+        return stackView
     }()
     
     var changeHistoryText: [String] = ["\n"]
@@ -49,8 +89,13 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(resetCountButton)
-        setupResetCountButtonView(button: resetCountButton)
+        buttonsStackView.addArrangedSubview(countPlusButton)
+        buttonsStackView.addArrangedSubview(resetCountButton)
+        buttonsStackView.addArrangedSubview(countMinesButton)
+        view.addSubview(buttonsStackView)
+
+        
+        setupViews()
         
        
 
@@ -77,11 +122,21 @@ class ViewController: UIViewController {
             updateHistory()
         }
     }
-    private func setupResetCountButtonView(button: UIButton) {
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private func setupViews() {
+        countPlusButton.translatesAutoresizingMaskIntoConstraints = false
+        resetCountButton.translatesAutoresizingMaskIntoConstraints = false
+        countMinesButton.translatesAutoresizingMaskIntoConstraints = false
+        buttonsStackView.translatesAutoresizingMaskIntoConstraints =  false
+        
         NSLayoutConstraint.activate([
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            button.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            countPlusButton.widthAnchor.constraint(equalToConstant: 100),
+            countPlusButton.heightAnchor.constraint(equalToConstant: 100),
+            countMinesButton.widthAnchor.constraint(equalToConstant: 100),
+            countMinesButton.heightAnchor.constraint(equalToConstant: 100),
+            resetCountButton.widthAnchor.constraint(equalToConstant: 100),
+            resetCountButton.heightAnchor.constraint(equalToConstant: 100),
+            buttonsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            buttonsStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
