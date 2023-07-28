@@ -78,19 +78,19 @@ class ViewController: UIViewController {
         view.addSubview(buttonsStackView)
         setupViews()
     }
-    func updateHistory(){
+   private func updateHistory(){
         var text = "История изменений:\n"
         for item in changeHistoryText {
             text = text + item + "\n"
         }
         historyChangesTextView.text = text
     }
-    func increaseCountAction(_ sender: UIButton) {
+    private func increaseCountAction(_ sender: UIButton) {
         countOfTapped += 1
         changeHistoryText.insert("[\(createDate())]: значение изменено на +1", at: 0)
         updateHistory()
     }
-    func decreaseCountAction(_ sender: UIButton) {
+    private func decreaseCountAction(_ sender: UIButton) {
         if countOfTapped > 0 {
             countOfTapped -= 1
             changeHistoryText.insert("[\(createDate())]: значение изменено на -1", at: 0)
