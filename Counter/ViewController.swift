@@ -79,7 +79,6 @@ class ViewController: UIViewController {
         setupViews()
     }
     func updateHistory(){
-        guard let string = changeHistoryText.last else {return}
         var text = "История изменений:\n"
         for item in changeHistoryText {
             text = text + item + "\n"
