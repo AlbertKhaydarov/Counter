@@ -15,22 +15,20 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var counterLabel: UILabel!
- 
     
-    @IBOutlet weak var changedHistoryTextField: UITextView!
+    @IBOutlet weak var historyChangesTextView: UITextView!
     
     lazy var countPlusButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
-        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
+        configuration.baseBackgroundColor = #colorLiteral(red: 0.9804422259, green: 0.5767289996, blue: 0.5899683237, alpha: 1)
         configuration.image = .init(named: "plus32")?.withRenderingMode(.alwaysTemplate)
         configuration.cornerStyle = .capsule
-        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
         let button = UIButton(configuration: configuration)
         button.addAction((UIAction(handler: { [weak self] _ in
-            self?.countOfTapped += 1
-            self?.changeHistoryText.insert("[дата и время]: значение изменено на +1", at: 0)
-            self?.updateHistory()
+            self?.increaseCountAction(button)
+            print(self?.changeHistoryText)
         })), for: .touchUpInside)
       
 
@@ -40,7 +38,7 @@ class ViewController: UIViewController {
     lazy var resetCountButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
-        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
+        configuration.baseBackgroundColor = #colorLiteral(red: 0.9804422259, green: 0.5767289996, blue: 0.5899683237, alpha: 1)
 
         configuration.image = .init(named: "fa6-solid_repeat")?.withRenderingMode(.alwaysTemplate)
         configuration.cornerStyle = .capsule
@@ -49,7 +47,9 @@ class ViewController: UIViewController {
         button.addAction((UIAction(handler: { [weak self] _ in
             self?.countOfTapped = 0
             self?.changeHistoryText.insert("[дата и время]: значение сброшено", at: 0)
+//            self?.changeHistoryText.append("[дата и время]: значение сброшено")
             self?.updateHistory()
+            print(self?.changeHistoryText)
         })), for: .touchUpInside)
         return button
     }()
@@ -57,16 +57,16 @@ class ViewController: UIViewController {
     lazy var countMinesButton: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.buttonSize = .large
-        configuration.baseBackgroundColor = #colorLiteral(red: 1, green: 0.3294117647, blue: 0.4509803922, alpha: 1)
+        configuration.baseBackgroundColor = #colorLiteral(red: 0.9804422259, green: 0.5767289996, blue: 0.5899683237, alpha: 1)
 
         configuration.image = .init(named: "minus32")?.withRenderingMode(.alwaysTemplate)
         configuration.cornerStyle = .capsule
-        configuration.baseForegroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        configuration.baseForegroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
         let button = UIButton(configuration: configuration)
         button.addAction((UIAction(handler: { [weak self] _ in
-            self?.countOfTapped += 1
-            self?.changeHistoryText.insert("[дата и время]: значение изменено на +1", at: 0)
-            self?.updateHistory()
+            self?.decreaseCountAction(button)
+//            self?.changeHistoryText.append("[дата и время]: значение изменено на -1")
+            print(self?.changeHistoryText)
         })), for: .touchUpInside)
         return button
     }()
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
         return stackView
     }()
     
-    var changeHistoryText: [String] = ["\n"]
+    var changeHistoryText: [String] = []
     
     var countOfTapped: Int = 0 {
         didSet {
@@ -93,29 +93,34 @@ class ViewController: UIViewController {
         buttonsStackView.addArrangedSubview(resetCountButton)
         buttonsStackView.addArrangedSubview(countMinesButton)
         view.addSubview(buttonsStackView)
-
-        
         setupViews()
-        
-       
-
     }
     func updateHistory(){
-//        changeHistoryText.forEach { string in
-       let string = changeHistoryText
-        changedHistoryTextField.text += "\(string)\n"
+        guard let string = changeHistoryText.last else {return}
+        
+        var text = "История изменений:\n"
+        for item in changeHistoryText {
+        text = text + item + "\n"
+        }
+        historyChangesTextView.text = text
+//        historyChangesTextView.text.append(string + "\n")
+//        changedHistoryTextField.text += "\(string[string.count - 1])\n"
 //        }
     }
     
-    @IBAction func increaseCountAction(_ sender: UIButton) {
+    
+    
+    func increaseCountAction(_ sender: UIButton) {
         countOfTapped += 1
         changeHistoryText.insert("[дата и время]: значение изменено на +1", at: 0)
+//        changeHistoryText.append("[дата и время]: значение изменено на +1")
         updateHistory()
     }
-    @IBAction func decreaseCountAction(_ sender: UIButton) {
+   func decreaseCountAction(_ sender: UIButton) {
         if countOfTapped > 0 {
             countOfTapped -= 1
             changeHistoryText.insert("[дата и время]: значение изменено на -1", at: 0)
+//            changeHistoryText.append("[дата и время]: значение изменено на -1")
             updateHistory()
         } else {
             changeHistoryText.insert("[дата и время]: попытка уменьшить значение счётчика ниже 0", at: 0)
